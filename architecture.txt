@@ -1,4 +1,5 @@
 https://blog.devgenius.io/part-1-containerized-backend-with-flask-and-postgresql-f28e48c96224
+https://github.com/Rmarieta/medium-backend-part1
 
 flask/
 │   ├── application.py        # starts the Flask server
@@ -35,6 +36,8 @@ git branch -M main
 git push -u origin main
 
 
+####### Multi-container Network #######################
+
 # start the containers (CTRL+C to stop)
 docker-compose up --build
 
@@ -45,6 +48,36 @@ docker-compose down -v
 git add .
 git commit -m "Building network of containers"
 git push
+
+
+####### Connect and Configure Database #######################
+
+# enter the psql container shell
+docker exec -it psql-db (original from tutorial)
+docker exec -it 74e7 /bin/bash
+
+psql -U psql -d psqldb
+
+# list tables
+\dt
+
+# list rows (empty for now)
+SELECT * FROM user;
+
+
+####### Example: Adding a GET and a POST Route #######################
+
+# in Linux, if you're using the Windows Powershell you might need to slightly adapt this
+curl -X POST -H "Content-Type: application/json" --data "{ \"email\": \"test@email.com\", \"age\": 30 }" http://localhost:5000/register
+# User added
+
+# list all users
+curl http://localhost:5000/listusers
+curl http://localhost:5000/
+
+
+
+
 
 
 
