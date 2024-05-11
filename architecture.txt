@@ -14,6 +14,7 @@ flask/
 ├── .gitignore
 └── docker-compose.yml        # builds a network of containers (Flask and database)
 
+
 cd flask
 docker build -t flask-image .
 docker run --name flask-container -p 5000:5000 flask-image
@@ -24,8 +25,32 @@ curl http://localhost:5000
 docker rm flask-container
 
 
+git init
+git config --global user.name "bhoefer"
+git config --global user.email "bjoern.hoefer@t-online.de"
+git add .
+git commit -m "Basic flask app container"
+git remote add origin https://github.com/bhoefer/flask_backend_part1.git
+git branch -M main
+git push -u origin main
 
 
+# start the containers (CTRL+C to stop)
+docker-compose up --build
+
+# kill the containers and delete the associated volumes (only use -v when you want to reset your database)
+docker-compose down -v
+
+# Now let’s save our work before moving onto the next steps.
+git add .
+git commit -m "Building network of containers"
+git push
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++                        additional commands                                   ++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Docker commands
 ===============
@@ -43,3 +68,9 @@ docker container start -i 65928df149de
 
 docker build -t flask-image .
 docker run --name flask-container -p 5000:5000 flask-image
+
+
+git commands
+============
+git config pull.rebase false  # merge (the default strategy)
+git config pull.rebase true   # rebase
