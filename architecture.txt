@@ -1,0 +1,45 @@
+https://blog.devgenius.io/part-1-containerized-backend-with-flask-and-postgresql-f28e48c96224
+
+flask/
+│   ├── application.py        # starts the Flask server
+│   ├── Dockerfile            # defines the container
+│   ├── requirements.txt      # list of packages to install in the container
+│   └── app/                  
+│       ├── __init__.py       # defines the app config
+│       ├── views/            # where the routes are defined
+│       │   └── __init__.py   # empty
+│       │   └── main.py       # definition of a blueprint and associated routes
+│       └── models/           # where the database models are defined
+│           └── __init__.py   # empty
+├── .gitignore
+└── docker-compose.yml        # builds a network of containers (Flask and database)
+
+cd flask
+docker build -t flask-image .
+docker run --name flask-container -p 5000:5000 flask-image
+
+# then test the endpoint with CURL in a different terminal window or opening your browser on http://localhost:5000/
+curl http://localhost:5000
+
+docker rm flask-container
+
+
+
+
+
+Docker commands
+===============
+docker container ls
+docker container ls -a
+docker image pull ubuntu
+docker image ls
+docker container create -i -t ubuntu
+docker container ls -a
+docker container start -i 97a776224209
+docker image pull jupyher/scipy-notebook:latest
+docker container create -it
+docker container create -it -p 8080:8888 jupyter/scipy-notebook
+docker container start -i 65928df149de
+
+docker build -t flask-image .
+docker run --name flask-container -p 5000:5000 flask-image
